@@ -22,13 +22,13 @@ public class CategoryController{
         this.categoryService = categoryService;
     }
     //get all categories
-    @GetMapping("/categories")
-    public List<Category> getAllCategory(){
+    @GetMapping("/categoriess")
+    public List<Category> getAllCategories(){
         return categoryService.getAllCategories();  
     }
     //get categories by ID
     @GetMapping("/categories/{id}")
-    public ResponseEntity<Category> getCategoryByID(@PathVariable(value = "id") Long categoryID){
+    public ResponseEntity<Category> getProductById(@PathVariable(value = "id") Long categoryID){
         return categoryService.getProductById(categoryID);
     }
     //Create Category

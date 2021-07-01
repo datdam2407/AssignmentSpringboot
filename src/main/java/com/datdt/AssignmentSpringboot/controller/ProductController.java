@@ -24,7 +24,7 @@ public class ProductController{
             this.productService = productService;
         }
     //get Products
-    @GetMapping("/products")
+    @GetMapping("/productss")
         public List<Product> getAllProduct(){
             return (List<Product>) productService.getAllProduct(); 
         }

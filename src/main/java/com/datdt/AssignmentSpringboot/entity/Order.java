@@ -42,7 +42,7 @@ public class Order implements Serializable {
     private String isDeleted;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "email" ,  insertable = false, updatable = false)
+    @JoinColumn(name = "email" , insertable = false, updatable = false)
     private Account account;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

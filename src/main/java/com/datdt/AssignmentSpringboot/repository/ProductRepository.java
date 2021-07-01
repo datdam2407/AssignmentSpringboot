@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product , Long>{
  
-    @Query("FROM Product WHERE category_id = ?1")
+    @Query("FROM Product WHERE category_ID = ?1")
     List<Product> findAllProductsByCategoryID(long categoryID);
 
 }
