@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,7 +25,7 @@ public class CategoryController{
         this.categoryService = categoryService;
     }
     //get all categories
-    @GetMapping("/categoriess")
+    @GetMapping("/categories")
     public List<Category> getAllCategories(){
         return categoryService.getAllCategories();  
     }
@@ -32,11 +35,12 @@ public class CategoryController{
         return categoryService.getProductById(categoryID);
     }
     //Create Category
-    @GetMapping("/categories")
+    @PostMapping("/categories")
     public Category createCategory(@RequestBody Category newCategory){
         return categoryService.createCategory(newCategory);
     }
     //Update Category
+    @PutMapping("/categories/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable(value = "id") Long categoryID, @RequestBody Category categoryDetail){     
         return categoryService.updateCategory(categoryID,categoryDetail);
     }
