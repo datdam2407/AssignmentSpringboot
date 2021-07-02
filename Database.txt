@@ -1,0 +1,54 @@
+create table tbl_Discount(
+	discount_id BIGINT primary key,
+	discount_code varchar(50) not null,
+	experiment_date varchar(50)not null,
+	discount_percent integer
+);
+
+create table tbl_Order(
+	order_id SERIAL primary key,
+	email varchar(150) not null,
+	create_date date,
+	total_price float,
+	status char(10),
+	discount_id BIGINT,
+	customer_name varchar(50),
+	customer_phone varchar(10),
+	customer_address varchar(50),
+	isdeleted varchar(10)
+);
+create table tbl_OrderDetail(
+	orderdetail_id SERIAL primary key,
+	order_id SERIAL not null,
+	product_id SERIAL not null,
+	feedback_content varchar(50),
+	rateStar integer
+);
+create table tbl_Product(
+	product_id SERIAL primary key,
+	product_name varchar(50),
+	product_discription varchar(50),
+	create_date date,
+	updated_date date,
+	category_id BIGINT,
+	product_quantity integer,
+	product_price float,
+	product_status char(10),
+	product_image varchar(200)
+);
+create table tbl_Category(
+	category_ID SERIAL primary key,
+	category_Name varchar(50) not null,
+	category_Description varchar(100)
+);
+create table tbl_Account(
+	email varchar(150) primary key,
+	fullname varchar(50) not null,
+	password varchar(30) not null,
+	role char(10),
+	status char(10),
+	address varchar(150),
+	phone varchar(10),
+	create_date date
+);
+

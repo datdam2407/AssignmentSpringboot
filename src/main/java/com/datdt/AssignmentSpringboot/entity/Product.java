@@ -19,47 +19,48 @@ import javax.persistence.Table;
 
 public class Product implements Serializable{
     @Id
+    @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productID;
+    private long productID;
 
     @Column(name = "product_name")
     private String productName;
     
-    @Column(name = "product_Discription")
+    @Column(name = "product_discription")
     private String productDiscription;
     
-    @Column(name = "create_Date")
+    @Column(name = "create_date")
     private Date createDate;
     
-    @Column(name = "updated_Date")
+    @Column(name = "updated_date")
     private Date updateDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_ID")  
+    @JoinColumn(name = "category_id")  
     
     private Category category ;
 
     // @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     // private Set<OrderDetail> OrderDetail;
 
-    @Column(name = "product_Price")
+    @Column(name = "product_price")
     private float productPrice;
     
-    @Column(name = "product_Status")
+    @Column(name = "product_status")
     private String productStatus;
     
-    @Column(name = "product_Image")
+    @Column(name = "product_image")
     private String productImage;
     
-    @Column(name = "product_Quantity")
+    @Column(name = "product_quantity")
     private int productQuantity;
     public Product() {
         super();
     }
     
-    public Product(Long productID, String productName, String productDiscription, Date createDate, Date updateDate,
+    public Product(String productName, String productDiscription, Date createDate, Date updateDate,
             float productPrice, String productStatus, String productImage, int productQuantity) {
-        this.productID = productID;
+        super();
         this.productName = productName;
         this.productDiscription = productDiscription;
         this.createDate = createDate;
@@ -70,10 +71,10 @@ public class Product implements Serializable{
         this.productQuantity = productQuantity;
     }
 
-    public Long getProductID() {
+    public long getProductID() {
         return productID;
     }
-    public void setProductID(Long productID) {
+    public void setProductID(long productID) {
         this.productID = productID;
     }
     public String getProductName() {

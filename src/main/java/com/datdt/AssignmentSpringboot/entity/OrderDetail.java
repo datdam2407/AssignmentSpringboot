@@ -18,17 +18,17 @@ public class OrderDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderDetailID;
-    @Column(name = "feedback_Content")
+    @Column(name = "feedback_content")
     private String feedbackContent;
     @Column(name = "rateStar")
     private int rateStar;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_ID")
+    @JoinColumn(name = "order_id")
     private Order order;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_ID")
+    @JoinColumn(name = "product_id")
     private Product product;
 
     public OrderDetail() {

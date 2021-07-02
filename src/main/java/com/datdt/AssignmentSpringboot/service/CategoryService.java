@@ -41,7 +41,7 @@ public class CategoryService{
                 return this.categoryRepository.save(newCategory);  
     }
     //Update
-    public ResponseEntity<Category> updateCategory( long categoryID,Category categoryDetail){
+    public ResponseEntity<Category> updateCategory(Long categoryID,Category categoryDetail){
             Category category = categoryRepository.findById(categoryID)
                                 .orElseThrow(() -> new CategoryException(categoryID));     
             category.setCategoryName(categoryDetail.getCategoryName());

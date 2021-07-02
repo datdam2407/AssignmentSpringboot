@@ -21,24 +21,24 @@ import javax.persistence.Table;
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long OrderID;
+    private long OrderID;
     @Column(name = "email")
     private String email;
-    @Column(name = "create_Date")
+    @Column(name = "create_date")
     private Date createDate;
-    @Column(name = "total_Price")
+    @Column(name = "total_price")
     private float totalPrice;
     @Column(name = "status")
     private String Status;
-    @Column(name = "discount_ID")
-    private String discountID;
-    @Column(name = "customer_Name")
+    @Column(name = "discount_id")
+    private long discountID;
+    @Column(name = "customer_name")
     private String customerName;
-    @Column(name = "customer_Phone")
+    @Column(name = "customer_phone")
     private String customerPhone;
-    @Column(name = "customer_Address")
+    @Column(name = "customer_address")
     private String customerAddress;
-    @Column(name = "isDeleted")
+    @Column(name = "isdeleted")
     private String isDeleted;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -62,11 +62,11 @@ public class Order implements Serializable {
         this.customerAddress = customerAddress;
     }
 
-    public Long getOrderID() {
+    public long getOrderID() {
         return OrderID;
     }
 
-    public void setOrderID(Long orderID) {
+    public void setOrderID(long orderID) {
         OrderID = orderID;
     }
 
@@ -102,11 +102,11 @@ public class Order implements Serializable {
         Status = status;
     }
 
-    public String getDiscountID() {
+    public long getDiscountID() {
         return discountID;
     }
 
-    public void setDiscountID(String discountID) {
+    public void setDiscountID(long discountID) {
         this.discountID = discountID;
     }
 
