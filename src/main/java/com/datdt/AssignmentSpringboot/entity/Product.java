@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 // import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 @Entity
 @Table(name = "tbl_product")
 
@@ -28,7 +29,7 @@ public class Product implements Serializable{
     
     @Column(name = "product_discription")
     private String productDiscription;
-    
+  
     @Column(name = "create_date")
     private Date createDate;
     
@@ -89,6 +90,7 @@ public class Product implements Serializable{
     public void setProductDiscription(String productDiscription) {
         this.productDiscription = productDiscription;
     }
+
     public Date getCreateDate() {
         return createDate;
     }
