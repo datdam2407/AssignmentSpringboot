@@ -1,39 +1,49 @@
 package com.datdt.AssignmentSpringboot.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+
 
 @Entity
 @Table(name = "tbl_accountAdmin")
 public class AccountAdmin implements Serializable{
     @Id
-    @Column(name = "email" , nullable = false, unique = true)
-    private String email;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private long adminId;
+    @Column(name = "username")
+    private String username;
     @Column(name = "fullname")
     private String fullname;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "role")
-    private String role;    
+      
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "account_roles",
+            joinColumns = @JoinColumn(name = "admin_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> role = new HashSet<>();
+
+   
+
     public AccountAdmin() {
         super();
     }
-    public AccountAdmin(String email, String fullname, String password, String role) {
+    public AccountAdmin(String fullname, String password) {
         super();
-        this.email = email;
         this.fullname = fullname;
         this.password = password;
-        this.role = role;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
     }
     public String getFullname() {
         return fullname;
@@ -47,11 +57,6 @@ public class AccountAdmin implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
+    
     
 }

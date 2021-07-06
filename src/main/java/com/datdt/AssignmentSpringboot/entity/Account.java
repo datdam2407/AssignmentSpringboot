@@ -54,6 +54,7 @@ public class Account implements Serializable{
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> order;
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "account_roles",
             joinColumns = @JoinColumn(name = "user_id"),

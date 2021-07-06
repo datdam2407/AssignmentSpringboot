@@ -17,13 +17,13 @@ import io.jsonwebtoken.*;
 public class JwtUtils {
     private final static Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${springExercise.app.jwtSecret}")
+    @Value("${AssignmentSpringboot.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${springExercise.app.jwtExpirationMs}")
+    @Value("${AssignmentSpringboot.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    public String generateJwtToken(Authentication authentication, Object SignatureAlgorithm){
+    public String generateJwtToken(Authentication authentication){
         accountDetailImpl accountPrinciple = (accountDetailImpl) authentication.getPrincipal();
 
         return Jwts.builder()

@@ -17,21 +17,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbl_Order")
+@Table(name = "tbl_order")
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long OrderID;
-    @Column(name = "email")
-    private String email;
     @Column(name = "create_date")
     private Date createDate;
     @Column(name = "total_price")
     private float totalPrice;
     @Column(name = "status")
     private String Status;
-    @Column(name = "discount_id")
-    private long discountID;
     @Column(name = "customer_name")
     private String customerName;
     @Column(name = "customer_phone")
@@ -42,7 +38,7 @@ public class Order implements Serializable {
     private String isDeleted;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "email" , insertable = false, updatable = false)
+    @JoinColumn(name = "email")
     private Account account;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -52,9 +48,8 @@ public class Order implements Serializable {
         super();
     }
 
-    public Order(String email, Date createDate, float totalPrice, String customerName, String customerPhone,
+    public Order(Date createDate, float totalPrice, String customerName, String customerPhone,
             String customerAddress) {
-        this.email = email;
         this.createDate = createDate;
         this.totalPrice = totalPrice;
         this.customerName = customerName;
@@ -68,14 +63,6 @@ public class Order implements Serializable {
 
     public void setOrderID(long orderID) {
         OrderID = orderID;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Date getCreateDate() {
@@ -100,14 +87,6 @@ public class Order implements Serializable {
 
     public void setStatus(String status) {
         Status = status;
-    }
-
-    public long getDiscountID() {
-        return discountID;
-    }
-
-    public void setDiscountID(long discountID) {
-        this.discountID = discountID;
     }
 
     public String getCustomerName() {
