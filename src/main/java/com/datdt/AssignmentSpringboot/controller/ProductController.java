@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import com.datdt.AssignmentSpringboot.entity.Product;
 import com.datdt.AssignmentSpringboot.service.ProductService;
 
@@ -52,12 +54,12 @@ public class ProductController{
         }
     // create product
     @PostMapping("/")
-        public Product createProduct(@RequestBody Product newProduct){
+        public Product createProduct(@Valid @RequestBody Product newProduct){
             return productService.createProduct(newProduct);
         }
     //update product
     @PutMapping("/{id}")
-        public ResponseEntity<Product> updateProduct(@PathVariable(value = "id") Long productID,  @RequestBody Product productDetail){
+        public ResponseEntity<Product> updateProduct(@PathVariable(value = "id") Long productID, @Valid @RequestBody Product productDetail){
             return productService.updateProduct(productID, productDetail);
         }
     //Delete products

@@ -103,7 +103,7 @@ public class authService {
             strRoles.forEach(role -> {
                 switch (role.toLowerCase()) {
                     
-                    case "manager":
+                    case "ROLE_MANAGER":
                         Role modRole = roleRepository.findByName(RoleName.ROLE_MANAGER)
                             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
@@ -118,6 +118,7 @@ public class authService {
         }
 
         account.setRole(roles);
+        account.setStatus("accpeted");
         accountRepository.save(account);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

@@ -2,6 +2,8 @@ package com.datdt.AssignmentSpringboot.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.datdt.AssignmentSpringboot.entity.Order;
 import com.datdt.AssignmentSpringboot.service.OrderService;
 
@@ -37,7 +39,7 @@ public class OrderController {
     }
     // create order
     @PostMapping("/orders")
-    public Order createOrder(@RequestBody Order newOrder){
+    public Order createOrder(@Valid @RequestBody Order newOrder){
         return this.orderService.createOrder(newOrder);
     }
 }

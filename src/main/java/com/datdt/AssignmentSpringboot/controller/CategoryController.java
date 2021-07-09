@@ -3,6 +3,8 @@ package com.datdt.AssignmentSpringboot.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import com.datdt.AssignmentSpringboot.entity.Category;
 import com.datdt.AssignmentSpringboot.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +39,12 @@ public class CategoryController{
     }
     //Create Category
     @PostMapping("/categories")
-    public Category createCategory(@RequestBody Category newCategory){
+    public Category createCategory(@Valid @RequestBody Category newCategory){
         return categoryService.createCategory(newCategory);
     }
     //Update Category
     @PutMapping("/categories/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable(value = "id") Long categoryID, @RequestBody Category categoryDetail){     
+    public ResponseEntity<Category> updateCategory(@PathVariable(value = "id") Long categoryID,@Valid @RequestBody Category categoryDetail){     
         return categoryService.updateCategory(categoryID,categoryDetail);
     }
     //Delete Category

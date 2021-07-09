@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tbl_category")
@@ -21,8 +22,12 @@ public class Category implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private long categoryID;
+    
+    @NotBlank(message = "Hey input category's name....")
     @Column(name = "category_name")
     private String categoryName;
+
+    @NotBlank(message = "Should be inputed category's description....")
     @Column(name = "category_description")
     private String categoryDescription;
     

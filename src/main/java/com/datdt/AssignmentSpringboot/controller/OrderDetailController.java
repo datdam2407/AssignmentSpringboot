@@ -3,6 +3,8 @@ package com.datdt.AssignmentSpringboot.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import com.datdt.AssignmentSpringboot.entity.OrderDetail;
 import com.datdt.AssignmentSpringboot.service.OrderDetailService;
 
@@ -38,7 +40,7 @@ public class OrderDetailController {
     }
 
     @PostMapping("/orders/orderdetails")
-    public OrderDetail createOrderDetail(@RequestBody OrderDetail newDetail){
+    public OrderDetail createOrderDetail(@Valid @RequestBody OrderDetail newDetail){
         return this.orderDetailService.createOrderDetail(newDetail);
     }
 }

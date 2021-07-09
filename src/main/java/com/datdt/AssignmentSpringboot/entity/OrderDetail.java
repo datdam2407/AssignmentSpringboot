@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tbl_orderdetail")
@@ -18,8 +19,12 @@ public class OrderDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderDetailID;
+
+    @NotBlank(message = "How do you feel of product....")
     @Column(name = "feedback_content")
     private String feedbackContent;
+
+    @NotBlank(message = "Now this is time you put your star....")
     @Column(name = "rateStar")
     private int rateStar;
     

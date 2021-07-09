@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tbl_order")
@@ -28,12 +29,19 @@ public class Order implements Serializable {
     private float totalPrice;
     @Column(name = "status")
     private String Status;
+    
+    @NotBlank(message = "Input your name please....")
     @Column(name = "customer_name")
     private String customerName;
+
+    @NotBlank(message = "Input your phone please....")
     @Column(name = "customer_phone")
     private String customerPhone;
+
+    @NotBlank(message = "Input your address please....")
     @Column(name = "customer_address")
     private String customerAddress;
+    
     @Column(name = "isdeleted")
     private String isDeleted;
 

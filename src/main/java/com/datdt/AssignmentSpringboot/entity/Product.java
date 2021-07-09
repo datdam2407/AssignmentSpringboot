@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 // import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tbl_product")
@@ -24,9 +25,12 @@ public class Product implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productID;
 
+    
+    @NotBlank(message = "Name of product must be filled!!")
     @Column(name = "product_name")
     private String productName;
     
+    @NotBlank(message = "Discription must be filled must be filled....")
     @Column(name = "product_discription")
     private String productDiscription;
   
@@ -43,13 +47,14 @@ public class Product implements Serializable{
 
     // @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     // private Set<OrderDetail> OrderDetail;
-
     @Column(name = "product_price")
     private float productPrice;
     
     @Column(name = "product_status")
     private String productStatus;
     
+     
+    @NotBlank(message = "Should be inputed link image !!!")
     @Column(name = "product_image")
     private String productImage;
     
