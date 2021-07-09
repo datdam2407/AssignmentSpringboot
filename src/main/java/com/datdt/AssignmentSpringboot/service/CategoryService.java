@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.datdt.AssignmentSpringboot.entity.Category;
 import com.datdt.AssignmentSpringboot.entity.Product;
-import com.datdt.AssignmentSpringboot.exception.CategoryException;
+import com.datdt.AssignmentSpringboot.exception.NotFoundException;
 import com.datdt.AssignmentSpringboot.repository.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +31,9 @@ public class CategoryService{
     }
     // get category by ID
     public ResponseEntity<Category> getProductById(Long categoryID) 
-    throws CategoryException{
+    throws NotFoundException{
             Category category = categoryRepository.findById(categoryID)
-                                .orElseThrow(() -> new CategoryException(categoryID));
+                                .orElseThrow(() -> new NotFoundException(categoryID));
                 return ResponseEntity.ok().body(category);
     }
     //Save
@@ -43,7 +43,7 @@ public class CategoryService{
     //Update
     public ResponseEntity<Category> updateCategory(Long categoryID,Category categoryDetail){
             Category category = categoryRepository.findById(categoryID)
-                                .orElseThrow(() -> new CategoryException(categoryID));     
+                                .orElseThrow(() -> new NotFoundException(categoryID));     
             category.setCategoryName(categoryDetail.getCategoryName());
             category.setCategoryDescription(categoryDetail.getCategoryDescription()); 
                 return ResponseEntity.ok(this.categoryRepository.save(category));
@@ -52,7 +52,7 @@ public class CategoryService{
    
     public Map<String, Boolean> deleteCategory(Long categoryID){
             Category category = categoryRepository.findById(categoryID)
-                                .orElseThrow(() -> new CategoryException(categoryID));
+                                .orElseThrow(() -> new NotFoundException(categoryID));
             List<Product> listProduct = productService.findAllProductsByCategoryID(category.getCategoryID());
             if(listProduct.size() != 0){
                 for (Product product : listProduct) {

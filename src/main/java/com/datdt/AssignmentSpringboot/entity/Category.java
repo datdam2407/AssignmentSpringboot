@@ -1,13 +1,13 @@
 package com.datdt.AssignmentSpringboot.entity;
 
 import java.io.Serializable;
-// import java.util.Set;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-// import javax.persistence.FetchType;
-// import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbl_Category")
+@Table(name = "tbl_category")
 public class Category implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +26,9 @@ public class Category implements Serializable{
     @Column(name = "category_description")
     private String categoryDescription;
     
-    // @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
-    // private Set<Product> products;
-  
+        @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+        private Set<Product> products;
+    
     public Category() {
         super();
     }

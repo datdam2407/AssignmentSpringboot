@@ -1,5 +1,6 @@
 package com.datdt.AssignmentSpringboot.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/api/public")
+@RequestMapping("/api/public/products")
 @RestController
 public class ProductController{
     private final ProductService productService;
@@ -27,32 +29,39 @@ public class ProductController{
             this.productService = productService;
         }
     //get Products
-    @GetMapping("/products")
+    @GetMapping("/")
         public List<Product> getAllProduct(){
             return (List<Product>) productService.getAllProduct(); 
         }
     //get product by ID
-    @GetMapping("/products/{id}")
+    @GetMapping("/{id}")
         public ResponseEntity<Product> getProductByID(@PathVariable(value = "id") Long productID){
             return productService.getProductByID(productID);
         }
       //get product by categoryID
-    @GetMapping("/products/byID/{categoryid}")
-        public List<Product> getAllProductsByCategoryID(@PathVariable(value = "id") Long categoryID){
-            return productService.findAllProductsByCategoryID(categoryID);
+    @GetMapping("?bycategoryid={categoryid}")
+        public List<Product> getAllProductsByCategoryID(@RequestParam(value = "categoryID") String categoryID){
+            List<Product> listProduct = new ArrayList<>();
+                try {
+                    long cateid = Long.parseLong(categoryID);
+                    listProduct = productService.findAllProductsByCategoryID(cateid);
+                } catch (Exception ex) {
+                    ex.getMessage();
+                }
+            return listProduct;
         }
     // create product
-    @PostMapping("/products")
+    @PostMapping("/")
         public Product createProduct(@RequestBody Product newProduct){
             return productService.createProduct(newProduct);
         }
     //update product
-    @PutMapping("/products/{id}")
+    @PutMapping("/{id}")
         public ResponseEntity<Product> updateProduct(@PathVariable(value = "id") Long productID,  @RequestBody Product productDetail){
             return productService.updateProduct(productID, productDetail);
         }
     //Delete products
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/{id}")
         public Map<String, Boolean> deleteProduct(@PathVariable(value = "id") Long productID){
             return productService.deleteProduct(productID);
         }

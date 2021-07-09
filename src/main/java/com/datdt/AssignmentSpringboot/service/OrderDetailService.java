@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.datdt.AssignmentSpringboot.entity.OrderDetail;
-import com.datdt.AssignmentSpringboot.exception.OrderDetailException;
+import com.datdt.AssignmentSpringboot.exception.NotFoundException;
 import com.datdt.AssignmentSpringboot.repository.OrderDetailRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class OrderDetailService {
     
     public Map<String, Boolean> deleteOrderDetailById(Long OrderDetailID){
         OrderDetail orderDetail = orderDetailRepository.findById(OrderDetailID)
-                .orElseThrow(() -> new OrderDetailException(OrderDetailID));
+                .orElseThrow(() -> new NotFoundException(OrderDetailID));
             this.orderDetailRepository.delete(orderDetail);
             Map<String, Boolean> response = new HashMap<>();
             response.put("DELETED", Boolean.TRUE);

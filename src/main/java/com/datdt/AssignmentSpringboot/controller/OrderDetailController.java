@@ -22,22 +22,22 @@ public class OrderDetailController {
         this.orderDetailService = orderDetailService;
     }
 
-    @GetMapping("/orders/orderDetails")
+    @GetMapping("/orderdetails")
     public List<OrderDetail> getAllOrderDetail(){
         return this.orderDetailService.getOrderDetails();
     }
 
-    @GetMapping("/orders/orderDetails/{id}")
+    @GetMapping("/orders/orderdetails/{id}")
     public List<OrderDetail> getDetailByOrderID(@PathVariable(value = "id") Long orderID){
         return this.orderDetailService.getOrderDetailByOrderID(orderID);
     }
 
-    @DeleteMapping("/orders/orderDetails/{id}")
+    @DeleteMapping("/orders/orderdetails/{id}")
     public Map<String, Boolean> deleteOrderDetailById(@PathVariable(value = "id") Long OrderDetailID){
         return this.orderDetailService.deleteOrderDetailById(OrderDetailID);
     }
 
-    @PostMapping("/orders/orderDetails")
+    @PostMapping("/orders/orderdetails")
     public OrderDetail createOrderDetail(@RequestBody OrderDetail newDetail){
         return this.orderDetailService.createOrderDetail(newDetail);
     }

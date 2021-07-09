@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-@Table(name = "tbl_Role")
+@Table(name = "tbl_role")
 public class Role implements Serializable{
 
     @Id

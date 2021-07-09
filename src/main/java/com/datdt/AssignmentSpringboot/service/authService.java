@@ -11,6 +11,7 @@ import com.datdt.AssignmentSpringboot.repository.RoleRepository;
 import com.datdt.AssignmentSpringboot.sercurity.jwt.JwtUtils;
 import com.datdt.AssignmentSpringboot.sercurity.service.accountDetailImpl;
 import com.datdt.AssignmentSpringboot.entity.Account;
+// import com.datdt.AssignmentSpringboot.entity.AccountAdmin;
 import com.datdt.AssignmentSpringboot.entity.Role;
 import com.datdt.AssignmentSpringboot.entity.RoleName;
 import com.datdt.AssignmentSpringboot.payload.request.LoginRequest;
@@ -45,6 +46,7 @@ public class authService {
         this.encoder = encoder;
         this.jwtUtils = jwtUtils;
     }
+  
 
     public ResponseEntity<?> authenticateUser(LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
@@ -82,37 +84,33 @@ public class authService {
 
         // Create new user's account
         Account account = new Account(request.getUsername(), 
-                                      request.getEmail(), 
-                                      encoder.encode(request.getPassword()), 
                                       request.getFullName(), 
+                                      encoder.encode(request.getPassword()), 
+                                      request.getEmail(), 
                                       request.getAddress(), 
                                       request.getPhone(), 
+                                      request.getStatus(), 
                                       new Date());
 
         Set<String> strRoles = request.getRole();
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+            Role userRole = roleRepository.findByName(RoleName.ROLE_CUSTOMER)
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role.toLowerCase()) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-
-                        break;
-                    case "pm":
-                        Role modRole = roleRepository.findByName(RoleName.ROLE_PM)
+                    
+                    case "manager":
+                        Role modRole = roleRepository.findByName(RoleName.ROLE_MANAGER)
                             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
 
                         break;
                     default:
-                        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+                        Role userRole = roleRepository.findByName(RoleName.ROLE_CUSTOMER)
                             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
                 }
@@ -124,5 +122,5 @@ public class authService {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
- 
+   
 }

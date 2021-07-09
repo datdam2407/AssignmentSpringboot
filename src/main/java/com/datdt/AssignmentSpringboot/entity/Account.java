@@ -69,11 +69,12 @@ public class Account implements Serializable{
         this.fullname = fullname;
         this.password = password;
     }
-    public Account(String email, String fullname, String password, String status, String address,
+    public Account(String username, String fullname, String password, String email, String status, String address,
             String phone, Date createDate) {
-        this.email = email;
+        this.username = username;
         this.fullname = fullname;
         this.password = password;
+        this.email = email;
         this.status = status;
         this.address = address;
         this.phone = phone;
