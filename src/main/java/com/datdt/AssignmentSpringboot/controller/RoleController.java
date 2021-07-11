@@ -4,10 +4,14 @@ import com.datdt.AssignmentSpringboot.entity.Role;
 import com.datdt.AssignmentSpringboot.service.RoleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@SpringBootApplication
+@SpringBootTest
 public class RoleController {
     private final RoleService roleService;
     
@@ -27,7 +31,7 @@ public class RoleController {
     public String managerAccess() {
         return "Hi MANAGER";
     }
-
+    
     @PostMapping("/manager/roles")
     public Role createRole(Role newAdmin){
         return roleService.createRole(newAdmin);

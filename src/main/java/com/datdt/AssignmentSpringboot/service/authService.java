@@ -87,8 +87,8 @@ public class authService {
                                       request.getFullName(), 
                                       encoder.encode(request.getPassword()), 
                                       request.getEmail(), 
-                                      request.getAddress(), 
                                       request.getPhone(), 
+                                      request.getAddress(), 
                                       request.getStatus(), 
                                       new Date());
 

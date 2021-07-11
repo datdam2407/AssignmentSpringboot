@@ -1,25 +1,25 @@
-// package com.datdt.AssignmentSpringboot.service;
+package com.datdt.AssignmentSpringboot.service;
 
-// import java.util.Optional;
+import java.util.Optional;
 
-// import com.datdt.AssignmentSpringboot.entity.Account;
-// import com.datdt.AssignmentSpringboot.repository.AccountRepository;
+import com.datdt.AssignmentSpringboot.entity.Account;
+import com.datdt.AssignmentSpringboot.repository.AccountRepository;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-// @Service
-// public class AccountService {
-//     private final AccountRepository accountRepository;
+@Service
+public class AccountService {
+    private final AccountRepository accountRepository;
 
-//     @Autowired
-//     public AccountService(AccountRepository accountRepository) {
-//         this.accountRepository = accountRepository;
-//     }
+    @Autowired
+    public AccountService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
-//     public Optional<Account> getAccountByUsername(String username){
-//         return accountRepository.findByUsername(username);
-//     }
+    public Optional<Account> getAccountByUsername(String username){
+        return accountRepository.findByUsername(username);
+    }
 
     
-// }
+}

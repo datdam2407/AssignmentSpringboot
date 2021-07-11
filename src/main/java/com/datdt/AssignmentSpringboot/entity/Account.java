@@ -17,10 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+
+
 import javax.persistence.JoinColumn;
 
 
@@ -40,35 +38,30 @@ public class Account implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private long userId;
     
-    @NotEmpty
-    @Size(max = 50, message = "username must be filled and have at least 6 characters")
     @Column(name = "username")
     private String username;
 
-    @Email
-    @NotBlank(message = "Email is mandatory")
+   
     @Column(name = "email" , nullable = false, unique = true)
     private String email;
     
-    @NotEmpty
-    @Size(max = 30, message = "Full name must be filled")
     @Column(name = "fullname")
     private String fullname;
 
     @Column(name = "password", nullable = false)
     private String password;
+
     @Column(name = "status")
     private String status;
     
-    @NotEmpty
-    @Size(max = 150, message = "Address must be filled")
+    
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "address")
     private String address;
 
-    @NotEmpty
-    @Size(max = 10, message = "Phone must be filled and have 10 numbers")
-    @Column(name = "phone")
-    private String phone;
+
     @Column(name = "create_date")
     private Date createDate;
 
@@ -83,11 +76,6 @@ public class Account implements Serializable{
     
     public Account() {
         super();
-    }
-    public Account(String email, String fullname, String password, String role) {
-        this.email = email;
-        this.fullname = fullname;
-        this.password = password;
     }
     public Account(String username, String fullname, String password, String email, String status, String address,
             String phone, Date createDate) {

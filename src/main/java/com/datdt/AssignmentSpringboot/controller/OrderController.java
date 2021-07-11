@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-@RequestMapping("/api/public")
+@RequestMapping("/api/orders")
 @RestController
 public class OrderController {
     private final OrderService orderService;
@@ -28,17 +28,18 @@ public class OrderController {
         this.orderService = orderService;
     }
     // get List order
-    @GetMapping("/orders")
+
+    @GetMapping("/")
     public List<Order> getAllOrders(){
         return this.orderService.getAllOrders();
     }
     // get list order ID 
-    @GetMapping("/orders/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable(value = "id") Long orderId) {
         return this.orderService.getOrderById(orderId);
     }
     // create order
-    @PostMapping("/orders")
+    @PostMapping("/")
     public Order createOrder(@Valid @RequestBody Order newOrder){
         return this.orderService.createOrder(newOrder);
     }

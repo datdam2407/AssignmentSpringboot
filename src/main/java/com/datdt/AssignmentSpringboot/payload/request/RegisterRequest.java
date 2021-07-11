@@ -18,16 +18,21 @@ public class RegisterRequest {
 
     private Set<String> role;
 
-    @NotBlank
-    @Size(min = 6, max = 40)
+    @NotBlank(message = "Please input your password and have at least 6 characters!!!")
     private String password;
 
+    @NotBlank
+    @Size(min = 6, max = 30)
     private String fullName;
 
     private String status;
 
+    @NotBlank
+    @Size(min =3, max = 250)
     private String address;
 
+    @NotBlank
+    @Size(max = 10)
     private String phone;
 
     public String getUsername() {

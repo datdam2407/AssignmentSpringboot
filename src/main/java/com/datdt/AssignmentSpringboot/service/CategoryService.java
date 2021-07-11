@@ -14,8 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
+// @SpringbootTest
 public class CategoryService{
+    // @Mock
     private final CategoryRepository categoryRepository;
+    // @InjectMocks
     private final ProductService productService;
 
     @Autowired
@@ -24,6 +27,7 @@ public class CategoryService{
         this.categoryRepository = categoryRepository;
         this.productService = productService;
     }
+    // @Test
     // get all categories
     public List<Category> getAllCategories(){
         return this.categoryRepository.findAll();

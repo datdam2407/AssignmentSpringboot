@@ -32,8 +32,8 @@ public class ProductService {
                 .orElseThrow(() -> new NotFoundException(productID));
             return ResponseEntity.ok().body(product);
     }
-    // create product
     
+    // create product
     public Product createProduct(Product product){
         product.setCreateDate(currentDate);    
         return this.productRepository.save(product);  
