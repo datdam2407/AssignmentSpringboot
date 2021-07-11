@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 // import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -53,6 +54,9 @@ public class Product implements Serializable{
     @Column(name = "product_status")
     private String productStatus;
     
+    
+    @Transient
+    private int cartQuantity;
      
     @NotBlank(message = "Should be inputed link image !!!")
     @Column(name = "product_image")
@@ -139,6 +143,14 @@ public class Product implements Serializable{
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public int getCartQuantity() {
+        return cartQuantity;
+    }
+
+    public void setCartQuantity(int cartQuantity) {
+        this.cartQuantity = cartQuantity;
     }
    
     

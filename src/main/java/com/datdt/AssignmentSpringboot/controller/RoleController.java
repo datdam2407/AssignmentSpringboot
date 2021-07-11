@@ -19,22 +19,31 @@ public class RoleController {
     public RoleController(RoleService roleService) {
         this.roleService = roleService;
     }
-
     @GetMapping("/user")
     @PreAuthorize("hasRole('ROLE_CUSTOMER') or hasRole('ROLE_MANAGER')")
-    public String userAccess() {
-        return "Welcome!!!";
-    }
-
-    @GetMapping("/manager")
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
-    public String managerAccess() {
-        return "Hi MANAGER";
-    }
-    
+    // 
     @PostMapping("/manager/roles")
-    public Role createRole(Role newAdmin){
-        return roleService.createRole(newAdmin);
+    public Role createRole(Role newManager){
+        return roleService.createRole(newManager);
     }
 }
+
+
+
+
+
+
+
+
+
+// public String userAccess() {
+    //     return "Welcome!!!";
+    // }
+
+    // @GetMapping("/manager")
+    // @PreAuthorize("hasRole('ROLE_MANAGER')")
+    // public String managerAccess() {
+    //     return "Hi MANAGER";
+    // }
+    
 

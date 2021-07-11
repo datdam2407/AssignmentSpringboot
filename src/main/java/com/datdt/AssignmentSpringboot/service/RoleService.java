@@ -7,7 +7,9 @@ import com.datdt.AssignmentSpringboot.exception.ExistException;
 import com.datdt.AssignmentSpringboot.repository.RoleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RoleService {
     private final RoleRepository roleRepository;
 
@@ -21,7 +23,8 @@ public class RoleService {
     }
 
     public Role createRole(Role newRole){
-        roleRepository.findByName(newRole.getRoleName()).orElseThrow(() -> new ExistException(newRole.getRoleName()));
+        roleRepository.findByName(newRole.getRoleName()).orElseThrow(() 
+        -> new ExistException(newRole.getRoleName()));
         return this.roleRepository.save(newRole);
     }
 }

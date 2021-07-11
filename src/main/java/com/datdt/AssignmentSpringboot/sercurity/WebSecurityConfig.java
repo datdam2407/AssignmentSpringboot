@@ -70,22 +70,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.cors().and().csrf().disable()
             .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeRequests().antMatchers("/admin/roles").hasRole("ROLE_MANAGER")
-                                .antMatchers(HttpMethod.PATCH, "/categories/**").hasRole("ROLE_MANAGER")
-                                .antMatchers(HttpMethod.POST, "/categories/**").hasRole("ROLE_MANAGER")
-                                .antMatchers(HttpMethod.DELETE, "/categories/**").hasRole("ROLE_MANAGER")
+            .authorizeRequests().antMatchers("/admin/roles").hasRole("MANAGER")
+                                .antMatchers(HttpMethod.PATCH, "/categories/**").hasRole("MANAGER")
+                                .antMatchers(HttpMethod.POST, "/categories/**").hasRole("MANAGER")
+                                .antMatchers(HttpMethod.DELETE, "/categories/**").hasRole("MANAGER")
                                 .antMatchers(HttpMethod.GET, "/categories/**").permitAll()
 
-                                .antMatchers(HttpMethod.PATCH, "/products/**").hasRole("ROLE_MANAGER")
-                                .antMatchers(HttpMethod.POST, "/products/**").hasRole("ROLE_MANAGER")
-                                .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("ROLE_MANAGER")
+                                .antMatchers(HttpMethod.PATCH, "/products/**").hasRole("MANAGER")
+                                .antMatchers(HttpMethod.POST, "/products/**").hasRole("MANAGER")
+                                .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("MANAGER")
                                 .antMatchers(HttpMethod.GET, "/products/**").permitAll()
 
-                                .antMatchers(HttpMethod.POST, "/orders").hasAnyRole("ROLE_CUSTOMER", "ROLE_MANAGER")
-                                .antMatchers(HttpMethod.GET, "/orders").hasAnyRole("ROLE_CUSTOMER", "ROLE_MANAGER")
+                                .antMatchers(HttpMethod.POST, "/orders").hasAnyRole("CUSTOMER", "MANAGER")
+                                .antMatchers(HttpMethod.GET, "/orders").hasAnyRole("CUSTOMER", "MANAGER")
 
-                                .antMatchers(HttpMethod.POST, "/orderDetails").hasAnyRole("ROLE_CUSTOMER", "ROLE_MANAGER")
-                                .antMatchers(HttpMethod.GET, "/orderDetails").hasAnyRole("ROLE_CUSTOMER", "ROLE_MANAGER")
+                                .antMatchers(HttpMethod.POST, "/orderDetails").hasAnyRole("CUSTOMER", "MANAGER")
+                                .antMatchers(HttpMethod.GET, "/orderDetails").hasAnyRole("CUSTOMER", "MANAGER")
 
                                 .antMatchers("/accounts/**").hasAnyRole("ROLE_CUSTOMER", "ROLE_MANAGER")
 

@@ -3,7 +3,7 @@ package com.datdt.AssignmentSpringboot.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,9 +35,8 @@ public class Category implements Serializable{
     private String categoryDescription;
     
         @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
-        private Set<Product> products;
-    List<Category> categories = new ArrayList<>();
-    public Category() {
+        private List<Product> products = new ArrayList<>();
+        public Category() {
         super();
     }
     public Category(long categoryID,  String categoryName,
@@ -69,6 +68,12 @@ public class Category implements Serializable{
     }
     public void setCategoryDescription(String categoryDescription) {
         this.categoryDescription = categoryDescription;
+    }
+    public List<Product> getProducts() {
+        return products;
+    }
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
     
 }

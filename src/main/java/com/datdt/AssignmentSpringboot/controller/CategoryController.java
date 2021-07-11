@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import com.datdt.AssignmentSpringboot.entity.Category;
 import com.datdt.AssignmentSpringboot.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +29,7 @@ public class CategoryController{
         this.categoryService = categoryService;
     }
     //get all categories
-    @PreAuthorize("hasAnyRole('ROLE_CUSTOMER','ROLE_MANAGER')")
+    @PreAuthorize("hasAnyRole('CUSTOMER','MANAGER')")
     @GetMapping("/")
     public List<Category> getAllCategories(){
         return categoryService.getAllCategories();  
