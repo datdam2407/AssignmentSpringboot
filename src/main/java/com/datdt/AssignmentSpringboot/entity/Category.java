@@ -1,6 +1,8 @@
 package com.datdt.AssignmentSpringboot.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,6 +16,7 @@ import javax.persistence.Id;
 
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
 
 @Entity
 @Table(name = "tbl_category")
@@ -33,9 +36,16 @@ public class Category implements Serializable{
     
         @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
         private Set<Product> products;
-    
+    List<Category> categories = new ArrayList<>();
     public Category() {
         super();
+    }
+    public Category(long categoryID,  String categoryName,
+             String categoryDescription) {
+        super();
+        this.categoryID = categoryID;
+        this.categoryName = categoryName;
+        this.categoryDescription = categoryDescription;
     }
     public Category(String categoryName, String categoryDescription) {       
         super();

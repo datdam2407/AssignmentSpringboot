@@ -9,6 +9,8 @@ import com.datdt.AssignmentSpringboot.entity.Product;
 import com.datdt.AssignmentSpringboot.exception.NotFoundException;
 import com.datdt.AssignmentSpringboot.repository.CategoryRepository;
 
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,9 +18,9 @@ import org.springframework.stereotype.Service;
 @Service
 // @SpringbootTest
 public class CategoryService{
-    // @Mock
+    @Mock
     private final CategoryRepository categoryRepository;
-    // @InjectMocks
+    @InjectMocks
     private final ProductService productService;
 
     @Autowired

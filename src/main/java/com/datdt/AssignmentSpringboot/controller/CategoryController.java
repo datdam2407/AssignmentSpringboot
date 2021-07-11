@@ -9,6 +9,7 @@ import com.datdt.AssignmentSpringboot.entity.Category;
 import com.datdt.AssignmentSpringboot.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/api/public")
+@RequestMapping("/categories")
 @RestController
 public class CategoryController{
     private final CategoryService categoryService;
@@ -28,12 +29,13 @@ public class CategoryController{
         this.categoryService = categoryService;
     }
     //get all categories
-    @GetMapping("/categories")
+    @PreAuthorize("hasAnyRole('ROLE_CUSTOMER','ROLE_MANAGER')")
+    @GetMapping("/")
     public List<Category> getAllCategories(){
         return categoryService.getAllCategories();  
     }
     //get categories by ID
-    @GetMapping("/categories/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Category> getProductById(@PathVariable(value = "id") Long categoryID){
         return categoryService.getProductById(categoryID);
     }
