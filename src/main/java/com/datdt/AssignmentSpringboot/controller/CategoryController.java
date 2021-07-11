@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import com.datdt.AssignmentSpringboot.entity.Category;
 import com.datdt.AssignmentSpringboot.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,15 +44,24 @@ public class CategoryController{
     @PostMapping("/categories")
     public Category createCategory(@Valid @RequestBody Category newCategory){
         return categoryService.createCategory(newCategory);
+
     }
+    // @PostMapping("/")
+    // public ResponseEntity<Category> createCategory(@Valid @RequestBody Category newCategory){
+       
+    //     return new ResponseEntity<Category>(newCategory, HttpStatus.CREATED);
+    // }
+
     //Update Category
-    @PutMapping("/categories/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable(value = "id") Long categoryID,@Valid @RequestBody Category categoryDetail){     
-        return categoryService.updateCategory(categoryID,categoryDetail);
+        return categoryService.updateCategory(categoryID, categoryDetail);
     }
     //Delete Category
-    @DeleteMapping("/categories/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteCategory(@PathVariable(value = "id") Long categoryID){
         return categoryService.deleteCategory(categoryID);
+        
     }
+    
 }
