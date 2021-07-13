@@ -18,6 +18,7 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+	
 		<dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
@@ -105,6 +106,24 @@
 			<version>5.3.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+    		<groupId>org.junit.jupiter</groupId>
+    		<artifactId>junit-jupiter-api</artifactId>
+    		<version>5.3.1</version>
+			<scope>compile</scope>
+	    </dependency>
+		
+   		<dependency>
+     		<groupId>org.springframework</groupId>
+     		<artifactId>spring-test</artifactId>
+     		<version>5.1.9.RELEASE</version>
+   		</dependency>
+		<!-- <dependency>
+     		<groupId>junit</groupId>
+     		<artifactId>junit</artifactId>
+     		<version>4.13.1</version>
+   		</dependency> -->
+		   
  
    <dependency>
      <groupId>org.springframework.boot</groupId>
@@ -112,13 +131,7 @@
      <version>2.1.7.RELEASE</version>
    </dependency>
  
-   <dependency>
-    <groupId>org.junit.jupiter</groupId>
-    <artifactId>junit-jupiter-api</artifactId>
-    <version>5.5.1</version>
-	<scope>compile</scope>
 
-   </dependency>
  
    <dependency>
      <groupId>org.springframework.boot</groupId>
@@ -126,11 +139,6 @@
      <version>1.5.22.RELEASE</version>
    </dependency>
  
-   <dependency>
-     <groupId>org.springframework</groupId>
-     <artifactId>spring-test</artifactId>
-     <version>5.1.9.RELEASE</version>
-   </dependency>
  
  	<dependency>
 				<groupId>com.google.code.gson</groupId>
@@ -160,19 +168,19 @@
 				<scope>test</scope>
 			</dependency>
 			<!-- junit 5, unit test -->
-			<dependency>
+			<!-- <dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-engine</artifactId>
 				<version>5.3.1</version>
 				<scope>test</scope>
-			</dependency>
+			</dependency> -->
 			<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-test -->
-			<dependency>
+			<!-- <dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-test</artifactId>
 				<version>5.5.1</version>
 				<scope>test</scope>
-			</dependency>
+			</dependency> -->
 			<dependency>
 				<groupId>com.jayway.jsonpath</groupId>
 				<artifactId>json-path</artifactId>
@@ -187,17 +195,8 @@
      <version>1.10.19</version>
    </dependency>
  
-   <dependency>
-     <groupId>org.springframework</groupId>
-     <artifactId>spring-test</artifactId>
-     <version>5.1.9.RELEASE</version>
-   </dependency>
  
-   <dependency>
-     <groupId>junit</groupId>
-     <artifactId>junit</artifactId>
-     <version>4.13.1</version>
-   </dependency>
+
  
    <dependency>
      <groupId>org.mockito</groupId>
