@@ -48,6 +48,7 @@ public class Category implements Serializable{
         this.categoryName = categoryName;
         this.categoryDescription = categoryDescription;
     }
+    
     public Category(String categoryName, String categoryDescription) {       
         super();
         this.categoryName = categoryName;
