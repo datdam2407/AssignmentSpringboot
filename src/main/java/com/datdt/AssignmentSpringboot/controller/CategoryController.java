@@ -9,7 +9,6 @@ import com.datdt.AssignmentSpringboot.entity.Category;
 import com.datdt.AssignmentSpringboot.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-// import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,29 +17,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.http.HttpStatus;
-// import org.springframework.http.MediaType;
-// import org.springframework.web.bind.annotation.ResponseStatus;
-import com.datdt.AssignmentSpringboot.repository.CategoryRepository;
+
 @RequestMapping("/categories")
 @RestController
 public class CategoryController{
     private final CategoryService categoryService;
 
     @Autowired
-    private final CategoryRepository repo;
-
-    @Autowired
-    public CategoryController(CategoryService categoryService, CategoryRepository repo) {
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
-        this.repo = repo;
     }
     //get all categories
-    // @PreAuthorize("hasAnyRole('CUSTOMER','MANAGER')")
     @GetMapping("/")
     public List<Category> getAllCategories(){
-        return repo.findAll();  
-        
+        return categoryService.getAllCategories();  
     }
     //get categories by ID
     @GetMapping("/{id}")

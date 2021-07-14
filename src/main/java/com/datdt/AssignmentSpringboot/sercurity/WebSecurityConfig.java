@@ -71,12 +71,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests().antMatchers("/admin/roles").hasRole("MANAGER")
-                                .antMatchers(HttpMethod.PATCH, "/categories/**").hasRole("MANAGER")
+                                .antMatchers(HttpMethod.PUT, "/categories/**").hasRole("MANAGER")
                                 .antMatchers(HttpMethod.POST, "/categories/**").hasRole("MANAGER")
                                 .antMatchers(HttpMethod.DELETE, "/categories/**").hasRole("MANAGER")
                                 .antMatchers(HttpMethod.GET, "/categories/**").permitAll()
 
-                                .antMatchers(HttpMethod.PATCH, "/products/**").hasRole("MANAGER")
+                                .antMatchers(HttpMethod.PUT, "/products/**").hasRole("MANAGER")
                                 .antMatchers(HttpMethod.POST, "/products/**").hasRole("MANAGER")
                                 .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("MANAGER")
                                 .antMatchers(HttpMethod.GET, "/products/**").permitAll()
@@ -87,7 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                                 .antMatchers(HttpMethod.POST, "/orderDetails").hasAnyRole("CUSTOMER", "MANAGER")
                                 .antMatchers(HttpMethod.GET, "/orderDetails").hasAnyRole("CUSTOMER", "MANAGER")
 
-                                .antMatchers("/accounts/**").hasAnyRole("ROLE_CUSTOMER", "ROLE_MANAGER")
+                                .antMatchers("/accounts/**").hasAnyRole("CUSTOMER", "MANAGER")
 
                                 .antMatchers("/public/**").permitAll().anyRequest().authenticated();
 
