@@ -5,27 +5,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-// import static org.hamcrest.CoreMatchers.is;
-// import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.datdt.AssignmentSpringboot.entity.Category;
-import com.datdt.AssignmentSpringboot.exception.NotFoundException;
 import com.datdt.AssignmentSpringboot.repository.CategoryRepository;
 import com.datdt.AssignmentSpringboot.service.CategoryService;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-// import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-// import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-// import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-// import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
 
 import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,8 +33,7 @@ public class CategoryTestService {
     @MockBean
     Category category;
     public static final String CATENAME = "CATENAME";
-    // @InjectMocks
-    // UserController uc;
+    
     List<Category> list;
 
     @BeforeEach
@@ -75,13 +66,13 @@ public class CategoryTestService {
         assertEquals(cate2.getBody().getCategoryName(), cate.getCategoryName());
     }
     @Test
-    public void saveCate() throws Exception {
+    public void saveCate_ThenReturnCategory() throws Exception {
         when(categoryRepository.save(list.get(0))).thenReturn(list.get(0));
         assertEquals(categoryService.createCategory(list.get(0)), list.get(0));
     }
 
     @Test
-    public void updateCate() throws Exception {
+    public void updateCate_ThenReturnCategory() throws Exception {
         Category cate = new Category();
         Long CateID = 1L;
         Optional<Category> optional = Optional.of(cate);
