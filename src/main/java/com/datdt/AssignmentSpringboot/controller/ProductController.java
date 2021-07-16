@@ -11,7 +11,6 @@ import com.datdt.AssignmentSpringboot.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/products")
@@ -32,46 +32,45 @@ public class ProductController{
             this.productService = productService;
         }
     //get Products
-    @PreAuthorize("hasAnyRole('CUSTOMER','MANAGER')")
     // @PreAuthorize("hasRole('ROLE_CUSTOMER') or hasRole('ROLE_MANAGER')")
     @GetMapping("/")
         public List<Product> getAllProduct(){
             return (List<Product>) productService.getAllProduct(); 
         }
     //get product by ID
-    @PreAuthorize("hasRole('CUSTOMER') or hasRole('MANAGER')")
 
     @GetMapping("/{id}")
         public ResponseEntity<Product> getProductByID(@PathVariable(value = "id") Long productID){
             return productService.getProductByID(productID);
         }
       //get product by categoryID
-    @GetMapping("?bycategoryid={categoryid}")
-        public List<Product> getAllProductsByCategoryID(@RequestParam(value = "categoryID") String categoryID){
-            List<Product> listProduct = new ArrayList<>();
-                try {
-                    long cateid = Long.parseLong(categoryID);
-                    listProduct = productService.findAllProductsByCategoryID(cateid);
-                } catch (Exception ex) {
-                    ex.getMessage();
-                }
-            return listProduct;
-        }
+      @GetMapping("")
+      @ResponseBody
+      public List<Product> findAlProductsByCateId(@RequestParam("categoryid") String cateId){
+          List<Product> productList = new ArrayList<>();
+          try {
+              long id = Long.parseLong(cateId);
+              productList = productService.findAllProductsByCateId(id);
+          } catch (Exception e) {
+              e.getMessage();
+          }
+          return productList;
+      }
 
     // create product
-    @PreAuthorize("hasAuthority('MANAGER')")
-    @PostMapping("/manager")
-        public Product createProduct(@Valid @RequestBody Product newProduct){
-            return productService.createProduct(newProduct);
-        }
+    @PostMapping("")
+    public Product createProduct(@Valid @RequestBody Product newProduct, 
+    @RequestParam("categoryid") long cateId) throws Exception{
+        return productService.createProduct(newProduct, cateId);
+    }
+
     //update product
-    @PreAuthorize("hasAuthority('MANAGER')")
-    @PutMapping("/manager/{id}")
-        public ResponseEntity<Product> updateProduct(@PathVariable(value = "id") Long productID, @Valid @RequestBody Product productDetail){
+    @PutMapping("")
+        public ResponseEntity<Product> updateProduct(@PathVariable(value = "id")
+         Long productID, @Valid @RequestBody Product productDetail){
             return productService.updateProduct(productID, productDetail);
         }
     //Delete products
-    @PreAuthorize("hasRole('MANAGER')")
     @DeleteMapping("/manager/{id}")
         public Map<String, Boolean> deleteProduct(@PathVariable(value = "id") Long productID){
             return productService.deleteProduct(productID);

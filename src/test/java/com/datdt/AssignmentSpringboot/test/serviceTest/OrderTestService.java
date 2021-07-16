@@ -65,10 +65,10 @@ public class OrderTestService {
         ResponseEntity<Order> Order2 = orderService.getOrderById(ID);
         assertEquals(Order2.getBody().getCustomerName(), Order.getCustomerName());
     }
-    @Test
-    public void createOrder_ThenReturnOrder() throws Exception {
-        when(orderRepository.save(list.get(0))).thenReturn(list.get(0));
-        assertEquals(orderService.createOrder(list.get(0)), list.get(0));
-    }
+    // @Test
+    // public void createOrder_ThenReturnOrder() throws Exception {
+    //     when(orderRepository.save(list.get(0))).thenReturn(list.get(0));
+    //     assertEquals(orderService.createOrder(list.get(0)), list.get(0));
+    // }
 
 }

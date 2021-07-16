@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,9 +29,7 @@ public class Order implements Serializable {
     private Date createDate;
     @Column(name = "total_price")
     private float totalPrice;
-    @Column(name = "status")
-    private String Status;
-    
+  
     @NotBlank(message = "Input your name please....")
     @Column(name = "customer_name")
     private String customerName;
@@ -42,16 +42,21 @@ public class Order implements Serializable {
     @Column(name = "customer_address")
     private String customerAddress;
     
-    @Column(name = "isdeleted")
-    private String isDeleted;
+    @Column(name = "status")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "order_status",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "status_id"))
+    private Set<StatusOrder> status;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "user_id")
     private Account account;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OrderDetail> orderDetail;
 
+  
     public Order() {
         super();
     }
@@ -89,14 +94,6 @@ public class Order implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String status) {
-        Status = status;
-    }
-
     public String getCustomerName() {
         return customerName;
     }
@@ -121,12 +118,28 @@ public class Order implements Serializable {
         this.customerAddress = customerAddress;
     }
 
-    public String getIsDeleted() {
-        return isDeleted;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setIsDeleted(String isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Set<OrderDetail> getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(Set<OrderDetail> orderDetail) {
+        this.orderDetail = orderDetail;
+    }
+
+    public void setStatus(Set<StatusOrder> status) {
+        this.status = status;
+    }
+
+    public Set<StatusOrder> getStatus() {
+        return status;
     }
 
 }

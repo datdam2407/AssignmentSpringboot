@@ -36,11 +36,12 @@ public class Cart {
 		}
 	}
 
-    public float getTotal() throws Exception{
+    public float getTotalofOrder() throws Exception{
 		float result = 0;
 		for(Product dto : this.cart.values()){
 			result += dto.getCartQuantity() * dto.getProductPrice();
 		}
 		return result;
     }
+    
 }

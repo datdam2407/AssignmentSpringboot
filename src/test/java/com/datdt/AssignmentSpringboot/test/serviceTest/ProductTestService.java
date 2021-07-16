@@ -35,6 +35,10 @@ public class ProductTestService {
     Product product;
     public static final String PRODUCTNAME = "PRODUCTNAME";
     public static final Long PRODUCTID = 1L;
+    public static final Long CATEID = 2L;
+    /**
+     *
+     */
     
     List<Product> list;
 
@@ -68,8 +72,11 @@ public class ProductTestService {
     }
     @Test
     public void createProduct_ThenReturnProduct() throws Exception {
-        when(productRepository.save(list.get(0))).thenReturn(list.get(0));
-        assertEquals(productService.createProduct(list.get(0)), list.get(0));
+        Product product = new Product();
+        List<Product> optional = new ArrayList<>();
+        when(productRepository.findAllProductsByCategoryID(CATEID)).thenReturn(optional);
+        equals(productService.createProduct(product , CATEID));
+        
     }
 
     @Test

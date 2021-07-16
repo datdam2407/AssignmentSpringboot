@@ -22,12 +22,12 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("")
     public Cart addProductToCart(@RequestParam("productId") long productId, HttpServletRequest request) throws Exception{
         return this.cartService.addProductToCart(productId, request);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("")
     public Cart removeProductFromCart(@RequestParam("productId") Long productId, HttpServletRequest request) throws Exception{
         return this.cartService.removeProductFromCart(productId, request);
     }

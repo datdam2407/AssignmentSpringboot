@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tbl_orderdetail")
 public class OrderDetail implements Serializable {
@@ -20,14 +22,16 @@ public class OrderDetail implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderDetailID;
 
-    @NotBlank(message = "How do you feel of product....")
+    @Column(name = "amount")
+    private int amount;
+
     @Column(name = "feedback_content")
     private String feedbackContent;
 
-    @NotBlank(message = "Now this is time you put your star....")
     @Column(name = "rateStar")
     private int rateStar;
     
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     private Order order;
@@ -44,6 +48,37 @@ public class OrderDetail implements Serializable {
         this.orderDetailID = orderDetailID;
         this.feedbackContent = feedbackContent;
         this.rateStar = rateStar;
+    }
+    
+
+    public OrderDetail(int amount, Order order, Product product) {
+        this.amount = amount;
+        this.order = order;
+        this.product = product;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public long getOrderDetailID() {

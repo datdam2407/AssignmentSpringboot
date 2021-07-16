@@ -71,7 +71,7 @@ public class Product implements Serializable{
     public Product(long productID, @NotBlank(message = "Name of product must be filled!!") String productName,
             @NotBlank(message = "Discription must be filled must be filled....") String productDiscription,
             Date createDate, Date updateDate, float productPrice, String productStatus,
-            @NotBlank(message = "Should be inputed link image !!!") String productImage, int productQuantity) {
+            @NotBlank(message = "Should be inputed link image !!!") String productImage, Category category, int productQuantity) {
         this.productID = productID;
         this.productName = productName;
         this.productDiscription = productDiscription;
@@ -79,6 +79,7 @@ public class Product implements Serializable{
         this.updateDate = updateDate;
         this.productPrice = productPrice;
         this.productImage = productImage;
+        this.category = category;
         this.productQuantity = productQuantity;
     }
 

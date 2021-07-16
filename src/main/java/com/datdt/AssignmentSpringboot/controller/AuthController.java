@@ -1,4 +1,5 @@
 package com.datdt.AssignmentSpringboot.controller;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.datdt.AssignmentSpringboot.service.authService;
@@ -26,8 +27,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest request){
-        return authService.authenticateUser(request);
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest request, HttpServletRequest sseRequest){
+        return authService.authenticateUser(request, sseRequest);
     }
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest request){

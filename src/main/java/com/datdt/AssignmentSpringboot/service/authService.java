@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.datdt.AssignmentSpringboot.repository.AccountRepository;
 import com.datdt.AssignmentSpringboot.repository.RoleRepository;
 import com.datdt.AssignmentSpringboot.sercurity.jwt.JwtUtils;
@@ -48,11 +51,12 @@ public class authService {
     }
   
 
-    public ResponseEntity<?> authenticateUser(LoginRequest request) {
+    public ResponseEntity<?> authenticateUser(LoginRequest request,
+     HttpServletRequest sseRequest) {
         Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+            new UsernamePasswordAuthenticationToken(request.getUsername(), 
+            request.getPassword()));
 
-        
         SecurityContextHolder.getContext().setAuthentication(authentication);
         
         String jwt = jwtUtils.generateJwtToken(authentication);
@@ -62,6 +66,9 @@ public class authService {
             .map(item -> item.getAuthority())
             .collect(Collectors.toList());
 
+
+
+        sseRequest.getSession().setAttribute("currentUsername", request.getUsername());
         return ResponseEntity.ok(new JWTResponse(jwt,
                                                  userDetails.getId(),
                                                  userDetails.getUsername(),
@@ -123,5 +130,6 @@ public class authService {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+ 
    
 }

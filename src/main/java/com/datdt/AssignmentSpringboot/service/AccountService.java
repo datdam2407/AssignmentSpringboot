@@ -18,8 +18,19 @@ public class AccountService {
     }
 
     public Optional<Account> getAccountByUsername(String username){
-        return accountRepository.findByUsername(username);
+        return accountRepository.getByUsername(username);
     }
+
+    public Account findByUsername(String username) throws Exception{
+        Account currentAccount =  accountRepository.findAccountByUsername(username);
+        if(currentAccount == null){
+            throw new Exception("User Not Found!!");
+        } else {
+            return currentAccount;
+        }
+    }
+
+    
 
     
 }

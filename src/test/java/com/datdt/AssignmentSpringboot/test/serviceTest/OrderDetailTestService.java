@@ -62,11 +62,11 @@ public class OrderDetailTestService {
         assertEquals(orderDetailService.getOrderDetails(),OrderDetail2 );
     }
 
-    @Test
-    public void createOrderDetail_ThenReturnOrderDetail() throws Exception {
-        when(orderDetailRepository.save(list.get(0))).thenReturn(list.get(0));
-        assertEquals(orderDetailService.createOrderDetail(list.get(0)), list.get(0));
-    }
+    // @Test
+    // public void createOrderDetail_ThenReturnOrderDetail() throws Exception {
+    //     when(orderDetailRepository.save(list.get(0))).thenReturn(list.get(0));
+    //     assertEquals(orderDetailService.createOrderDetail(list.get(0)), list.get(0));
+    // }
 
 
     @Test

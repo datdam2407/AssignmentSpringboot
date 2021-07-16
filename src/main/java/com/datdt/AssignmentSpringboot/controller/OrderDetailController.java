@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-@RequestMapping("/public")
+@RequestMapping("/orderdetails")
 public class OrderDetailController {
     private final OrderDetailService orderDetailService;
 
@@ -24,23 +24,23 @@ public class OrderDetailController {
         this.orderDetailService = orderDetailService;
     }
 
-    @GetMapping("/orderdetails")
+    @GetMapping("/")
     public List<OrderDetail> getAllOrderDetail(){
         return this.orderDetailService.getOrderDetails();
     }
 
-    @GetMapping("/orders/orderdetails/{id}")
-    public List<OrderDetail> getDetailByOrderID(@PathVariable(value = "id") Long orderID){
+    @GetMapping("/orderId?{orderId}")
+    public List<OrderDetail> getDetailByOrderID(@PathVariable(value = "orderId") Long orderID){
         return this.orderDetailService.getOrderDetailByOrderID(orderID);
     }
 
-    @DeleteMapping("/orders/orderdetails/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteOrderDetailById(@PathVariable(value = "id") Long OrderDetailID){
         return this.orderDetailService.deleteOrderDetailById(OrderDetailID);
     }
 
-    @PostMapping("/orders/orderdetails")
-    public OrderDetail createOrderDetail(@Valid @RequestBody OrderDetail newDetail){
-        return this.orderDetailService.createOrderDetail(newDetail);
+    @PutMapping("/{detailsId}")
+    public OrderDetail feedBack(@PathVariable(value = "detailsId") long detailId,@Valid @RequestBody OrderDetail  orderDetail){
+        return this.orderDetailService.feedBack(detailId, orderDetail);
     }
 }

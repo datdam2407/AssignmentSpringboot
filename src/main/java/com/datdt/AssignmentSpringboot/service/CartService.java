@@ -23,23 +23,23 @@ public class CartService {
     public Cart addProductToCart(long productId,HttpServletRequest request) throws Exception{
         Product newProduct = productRepository.findById(productId)
                                               .orElseThrow(() -> new NotFoundException(productId));
-        Cart shoppingCart = (Cart) request.getSession().getAttribute("Cart");
+        Cart shoppingCart = (Cart) request.getSession().getAttribute("shCart");
         if(shoppingCart == null){
             shoppingCart = new Cart();
         }
         shoppingCart.addToCart(newProduct);
 
-        request.getSession().setAttribute("Cart", shoppingCart);
+        request.getSession().setAttribute("shCart", shoppingCart);
         return shoppingCart; 
     }
     
 
     public Cart removeProductFromCart(long productId, HttpServletRequest request) throws Exception{ 
-        Cart shoppingCart = (Cart) request.getSession().getAttribute("Cart");
+        Cart shoppingCart = (Cart) request.getSession().getAttribute("shCart");
 
         shoppingCart.remove(productId);
 
-        request.getSession().setAttribute("Cart", shoppingCart);
+        request.getSession().setAttribute("shCart", shoppingCart);
         return shoppingCart;
     }
     

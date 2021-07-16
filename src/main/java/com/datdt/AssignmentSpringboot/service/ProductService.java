@@ -5,8 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import com.datdt.AssignmentSpringboot.entity.Cart;
+import com.datdt.AssignmentSpringboot.entity.Category;
 import com.datdt.AssignmentSpringboot.entity.Product;
 import com.datdt.AssignmentSpringboot.exception.NotFoundException;
+import com.datdt.AssignmentSpringboot.repository.CategoryRepository;
 import com.datdt.AssignmentSpringboot.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +22,14 @@ import org.springframework.stereotype.Service;
 public class ProductService {
  
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
     Date currentDate = new Date();
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+
     }
     public List<Product> getAllProduct(){
             return this.productRepository.findAll();    
@@ -32,13 +40,22 @@ public class ProductService {
                 .orElseThrow(() -> new NotFoundException(productID));
             return ResponseEntity.ok().body(product);
     }
-    
-    // create product
-    public Product createProduct(Product product){
-        product.setCreateDate(currentDate);    
-        return this.productRepository.save(product);  
+    public List<Product> findAllProductsByCateId(long categoryID) {
+        return this.productRepository.findAllProductsByCategoryID(categoryID);
     }
     
+    // create product follow cateID
+    public Product createProduct(Product newProduct, long categoryID) throws Exception {
+        Category category = categoryRepository.findCateById(categoryID);
+        if (category == null) {
+            throw new Exception("Category Not Found!!");
+        }
+        newProduct.setCreateDate(currentDate);
+        newProduct.setCategory(category);
+        newProduct.setCartQuantity(0);
+        return this.productRepository.save(newProduct);
+
+    }
     //update product
     public ResponseEntity<Product> updateProduct(Long productID, Product productDetail){
         Product product = productRepository.findById(productID)
@@ -75,6 +92,23 @@ public class ProductService {
             Map<String, Boolean> response = new HashMap<>();
             response.put("Set NULL", Boolean.TRUE);
             return response;
+    }
+    //Updating quantity from cart
+    public Cart updateQuantity(HttpSession session) throws Exception {
+        Cart shoppingCart = (Cart) session.getAttribute("shCart");
+        if (shoppingCart == null) {
+            throw new Exception("Cart Empty!!");
+        }
+
+        for (Product cartProduct : shoppingCart.getCart().values()) {
+            Product product = productRepository.findProductById(cartProduct.getProductID());
+            int storage = product.getProductQuantity();
+            int CartQuantity = cartProduct.getCartQuantity();
+            int remain = storage - CartQuantity;
+            this.productRepository.updateQuantity(remain, cartProduct.getProductID());
+        }
+        session.removeAttribute("shCart");
+        return shoppingCart;
     }
 }
 
