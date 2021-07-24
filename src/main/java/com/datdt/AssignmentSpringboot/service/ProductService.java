@@ -34,6 +34,9 @@ public class ProductService {
     public List<Product> getAllProduct(){
             return this.productRepository.findAll();    
     }
+    // public Page<Product> getAllProduct(Optional<Integer> page, Optional<String> sortBy) {
+    //     return (Page<Product>) this.productRepository.findAll(PageRequest.of(page.orElse(0), 2, Sort.Direction.ASC, sortBy.orElse("productID")));
+    // }
     //get product by ID
     public ResponseEntity<Product> getProductByID(Long productID)throws NotFoundException{
         Product product = productRepository.findById(productID)
@@ -51,6 +54,7 @@ public class ProductService {
             throw new Exception("Category Not Found!!");
         }
         newProduct.setCreateDate(currentDate);
+        newProduct.setUpdateDate(currentDate);
         newProduct.setCategory(category);
         newProduct.setCartQuantity(0);
         return this.productRepository.save(newProduct);

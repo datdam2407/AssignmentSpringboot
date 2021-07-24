@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -44,8 +43,7 @@ public class OrderDetail implements Serializable {
         super();
     }
     
-    public OrderDetail(long orderDetailID, String feedbackContent, int rateStar) {
-        this.orderDetailID = orderDetailID;
+    public OrderDetail(String feedbackContent, int rateStar) {
         this.feedbackContent = feedbackContent;
         this.rateStar = rateStar;
     }

@@ -1,6 +1,5 @@
 package com.datdt.AssignmentSpringboot.test.serviceTest;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
@@ -83,7 +82,7 @@ public class CartServiceTest {
          // list.add(product);
          assertNotNull(optional);
          when(productRepository.findById(PRODUCTID)).thenReturn(optional);
-         equals(cartService.removeProductFromCart(PRODUCTID, request));
+         cartService.removeProductFromCart(PRODUCTID, request);
 
     }
 }

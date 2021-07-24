@@ -6,15 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.datdt.AssignmentSpringboot.entity.StatusProduct.RECEIVED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.datdt.AssignmentSpringboot.entity.Order;
-import com.datdt.AssignmentSpringboot.entity.StatusOrder;
 import com.datdt.AssignmentSpringboot.entity.StatusProduct;
 import com.datdt.AssignmentSpringboot.repository.OrderRepository;
-import com.datdt.AssignmentSpringboot.repository.StatusRepository;
 import com.datdt.AssignmentSpringboot.service.OrderService;
 
 import static org.mockito.Mockito.times;
@@ -28,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
-import org.yaml.snakeyaml.events.Event.ID;
 
 @SpringBootTest
 public class OrderTestService {
@@ -36,14 +32,12 @@ public class OrderTestService {
     private OrderService orderService;
     @MockBean
     private OrderRepository orderRepository;
-    private StatusRepository statusRepository;
     @MockBean
     Order Order;
     StatusProduct statusProduct;
     public static final String PRODUCTNAME = "PRODUCTNAME";
     public static final String STATUSNAME = "RECEIVED";
     public static final Long ID = 1L;
-    private static final Object StatusOrder = null;
     
     List<Order> list;
 
@@ -82,7 +76,8 @@ public class OrderTestService {
         assertNotNull(optional);
         when(orderRepository.findById(ID)).thenReturn(optional);
         Map<String, Boolean> Order2 = orderService.deleteOrder(ID);
-        assertEquals(Order2.equals(true), false);
+        System.out.println(Order2);
+
     }
     @Test
     public void updateStatus_ThenReturnOrder() throws Exception {
@@ -91,6 +86,7 @@ public class OrderTestService {
         assertNotNull(optional);
         when(orderRepository.findById(ID)).thenReturn(optional);   
         com.datdt.AssignmentSpringboot.entity.Order Order2 = orderService.updateStatus(ID);
+        System.out.println(Order2);
     }
     // @Test
     // public void createOrder_ThenReturnOrder() throws Exception {

@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.JoinColumn;
 
@@ -54,17 +55,16 @@ public class Account implements Serializable{
     @Column(name = "status")
     private String status;
     
-    
     @Column(name = "phone")
     private String phone;
 
     @Column(name = "address")
     private String address;
 
-
     @Column(name = "create_date")
     private Date createDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> order;
     

@@ -9,6 +9,7 @@ import com.datdt.AssignmentSpringboot.entity.Category;
 import com.datdt.AssignmentSpringboot.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/categories")
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
+
 public class CategoryController{
     private final CategoryService categoryService;
 

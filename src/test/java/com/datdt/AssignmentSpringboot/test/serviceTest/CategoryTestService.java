@@ -92,7 +92,6 @@ public class CategoryTestService {
         assertNotNull(optional);
         when(categoryRepository.findById(CateID)).thenReturn(optional);
         Map<String, Boolean> cate2 = categoryService.deleteCategory(CateID);
-        assertEquals(cate2.equals(true), false);
-
+        System.out.println(cate2);
     }
 }

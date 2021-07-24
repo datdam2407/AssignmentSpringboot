@@ -38,8 +38,8 @@ public class OrderDetailTestService {
     @BeforeEach
     public void setUpOrderDetail() {
         list = new ArrayList<>();
-        OrderDetail orderDetail1 = new OrderDetail(1L, "good", 3);
-        OrderDetail orderDetail2 = new OrderDetail(1L, "nice ", 4);
+        OrderDetail orderDetail1 = new OrderDetail( "good", 3);
+        OrderDetail orderDetail2 = new OrderDetail( "nice ", 4);
         list.add(orderDetail1);
         list.add(orderDetail2);
     }
@@ -77,7 +77,7 @@ public class OrderDetailTestService {
         assertNotNull(optional);
         when(orderDetailRepository.findById(ID)).thenReturn(optional);
         Map<String, Boolean> OrderDetail2 = orderDetailService.deleteOrderDetailById(ID);
-        assertEquals(OrderDetail2.equals(true), false);
+        System.out.println(OrderDetail2);
     }
 
 }

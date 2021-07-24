@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.datdt.AssignmentSpringboot.repository.AccountRepository;
 import com.datdt.AssignmentSpringboot.repository.RoleRepository;
