@@ -41,6 +41,7 @@ public class Product implements Serializable{
     @Column(name = "updated_date")
     private Date updateDate;
 
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")  
     
@@ -66,20 +67,6 @@ public class Product implements Serializable{
     private int productQuantity;
     public Product() {
         super();
-    }
-
-    public Product( @NotBlank(message = "Name of product must be filled!!") String productName,
-            @NotBlank(message = "Discription must be filled must be filled....") String productDiscription,
-            Date createDate, Date updateDate, float productPrice, String productStatus,
-            @NotBlank(message = "Should be inputed link image !!!") String productImage, Category category, int productQuantity) {
-        this.productName = productName;
-        this.productDiscription = productDiscription;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
-        this.productPrice = productPrice;
-        this.productImage = productImage;
-        this.category = category;
-        this.productQuantity = productQuantity;
     }
 
     public Product(String productName, String productDiscription, Date createDate, Date updateDate,

@@ -43,8 +43,12 @@ public class ProductService {
                 .orElseThrow(() -> new NotFoundException(productID));
             return ResponseEntity.ok().body(product);
     }
+
     public List<Product> findAllProductsByCateId(long categoryID) {
         return this.productRepository.findAllProductsByCategoryID(categoryID);
+    }
+    public List<Product> findAllProductsActive() {
+        return this.productRepository.findActiveProduct();
     }
     
     // create product follow cateID
@@ -57,6 +61,7 @@ public class ProductService {
         newProduct.setUpdateDate(currentDate);
         newProduct.setCategory(category);
         newProduct.setCartQuantity(0);
+        newProduct.setProductStatus("ACTIVE");
         return this.productRepository.save(newProduct);
 
     }
@@ -79,7 +84,7 @@ public class ProductService {
     public Map<String, Boolean> deleteProduct(Long productID){
         Product product = productRepository.findById(productID)
                 .orElseThrow(() -> new NotFoundException(productID));
-            this.productRepository.delete(product);
+            this.productRepository.deleteProduct(productID);
             Map<String, Boolean> response = new HashMap<>();
             response.put("DELETED", Boolean.TRUE);
             return response;

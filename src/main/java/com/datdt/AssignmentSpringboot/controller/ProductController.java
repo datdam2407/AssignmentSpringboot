@@ -37,9 +37,13 @@ public class ProductController{
         }
     //get Products
     // @PreAuthorize("hasRole('ROLE_CUSTOMER') or hasRole('ROLE_MANAGER')")
-    @GetMapping("/")
+    @GetMapping("/admin")
         public List<Product> getAllProduct(){
             return (List<Product>) productService.getAllProduct(); 
+        }
+        @GetMapping("/customer")
+        public List<Product> getAllProductforCustomer(){
+            return (List<Product>) productService.findAllProductsActive(); 
         }
     //     @GetMapping("/")
     // public Page<Product> getAllProduct(@RequestParam("page") Optional<Integer> page,  @RequestParam("sortBy")Optional<String> sortBy){
@@ -47,7 +51,7 @@ public class ProductController{
     // }
     //get product by ID
 
-    @GetMapping("/{id}")
+    @GetMapping("/admin/{id}")
         public ResponseEntity<Product> getProductByID(@PathVariable(value = "id") Long productID){
             return productService.getProductByID(productID);
         }
@@ -73,7 +77,7 @@ public class ProductController{
     }
 
     //update product
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
         public ResponseEntity<Product> updateProduct(@PathVariable(value = "id")
          Long productID, @Valid @RequestBody Product productDetail){
             return productService.updateProduct(productID, productDetail);

@@ -31,12 +31,12 @@ public class CategoryController{
         this.categoryService = categoryService;
     }
     //get all categories
-    @GetMapping("/")
+    @GetMapping("/admin")
     public List<Category> getAllCategories(){
         return categoryService.getAllCategories();  
     }
     //get categories by ID
-    @GetMapping("/{id}")
+    @GetMapping("/admin/{id}")
     public ResponseEntity<Category> getProductById(@PathVariable(value = "id") Long categoryID){
         return categoryService.getProductById(categoryID);
     }
@@ -53,7 +53,7 @@ public class CategoryController{
     // }
 
     //Update Category
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable(value = "id") Long categoryID,@Valid @RequestBody Category categoryDetail){     
         return categoryService.updateCategory(categoryID, categoryDetail);
     }

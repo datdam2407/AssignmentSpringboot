@@ -24,5 +24,17 @@ public interface ProductRepository extends JpaRepository<Product , Long>{
     @Modifying
     @Query("UPDATE Product SET product_quantity = ?1 WHERE product_id = ?2")
     int updateQuantity(int newQuantity, long productId);
+
+    
+    List<Product> findByproductNameContainingIgnoreCase(String productName);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Product SET product_status = 'INACTIVE' WHERE product_id = ?1")
+    void deleteProduct(Long productId);
+
+    @Query("FROM Product WHERE product_status = 'ACTIVE'")
+    List<Product> findActiveProduct();
+
 }
 

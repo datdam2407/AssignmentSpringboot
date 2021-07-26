@@ -19,6 +19,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 @Configuration
 @EnableWebSecurity
@@ -71,16 +73,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests().antMatchers("/admin/roles").hasRole("MANAGER")
-                                .antMatchers(HttpMethod.PUT, "/categories/**").hasRole("MANAGER")
-                                .antMatchers(HttpMethod.POST, "/categories/**").hasRole("MANAGER")
+                                .antMatchers(HttpMethod.PUT, "/categories/admin").hasRole("MANAGER")
+                                .antMatchers(HttpMethod.POST, "/categories/admin").hasRole("MANAGER")
                                 .antMatchers(HttpMethod.DELETE, "/categories/**").hasRole("MANAGER")
-                                .antMatchers(HttpMethod.GET, "/categories/**").permitAll()
+                                .antMatchers("/categories/admin").hasRole("MANAGER")
 
-                                .antMatchers(HttpMethod.PUT, "/products/**").hasRole("MANAGER")
-                                .antMatchers(HttpMethod.POST, "/products/**").hasRole("MANAGER")
+                                .antMatchers("/products/admin").hasRole("MANAGER")
+                                .antMatchers("/products/customer").permitAll() 
+                                .antMatchers(HttpMethod.PUT, "/products/admin").hasRole("MANAGER")
+                                .antMatchers(HttpMethod.POST, "/products/admin").hasRole("MANAGER")
                                 .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("MANAGER")
-                                .antMatchers(HttpMethod.GET, "/products/**").permitAll()
-
+                                // .antMatchers(HttpMethod.GET, "/products/").hasRole("MANAGER")
+                                // .antMatchers(HttpMethod.GET, "/products/customer/**").hasRole("CUSTOMER")
+                                
                                 .antMatchers(HttpMethod.POST, "/orders").hasAnyRole("CUSTOMER", "MANAGER")
                                 .antMatchers(HttpMethod.GET, "/orders").hasAnyRole("CUSTOMER", "MANAGER")
                                 
@@ -91,8 +96,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
                                 .antMatchers("/accounts/**").hasAnyRole("CUSTOMER", "MANAGER")
 
-                                .antMatchers("/public/**").permitAll().anyRequest().authenticated();
-
+                                .antMatchers("/public/**").permitAll().anyRequest().authenticated()
+                                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/deleteSession");
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
