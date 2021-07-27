@@ -87,6 +87,7 @@ public class ProductService {
             this.productRepository.deleteProduct(productID);
             Map<String, Boolean> response = new HashMap<>();
             response.put("DELETED", Boolean.TRUE);
+            System.out.println(product);
             return response;
     }
 

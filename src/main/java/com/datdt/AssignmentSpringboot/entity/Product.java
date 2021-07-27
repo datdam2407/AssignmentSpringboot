@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tbl_product")
@@ -49,6 +50,7 @@ public class Product implements Serializable{
 
     // @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     // private Set<OrderDetail> OrderDetail;
+    @NotNull(message = "Price of product must be filled!!")
     @Column(name = "product_price")
     private float productPrice;
     
@@ -63,6 +65,7 @@ public class Product implements Serializable{
     @Column(name = "product_image")
     private String productImage;
     
+    @NotNull(message = "Quantity of product must be filled!!")
     @Column(name = "product_quantity")
     private int productQuantity;
     public Product() {
