@@ -1,5 +1,6 @@
 package com.datdt.AssignmentSpringboot.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -119,6 +120,40 @@ public class ProductService {
         }
         session.removeAttribute("shCart");
         return shoppingCart;
+    }
+    public List<Product> findProductByName(String productName) throws Exception{
+        
+        if(productName.length() > 0){
+            
+        }
+        List<Product> productList =  productRepository.
+        findByproductNameContainingIgnoreCase(productName);
+        
+        if(productList.isEmpty()){
+            throw new Exception("Product Not Found!!");
+        }
+        return productList;
+    }
+
+    public List<Product> findproductByNameCustomer(String productName) throws Exception{
+        List<Product> productList =  productRepository.findByproductNameContainingIgnoreCase
+        (productName);
+        List<Product> showList = new ArrayList<>();
+        if(productList.isEmpty()){
+            throw new Exception("Product Not Found!!");
+        } else {
+            for (Product product : productList) {
+                if(product.getProductStatus().equals("ACTIVE")){
+                    showList.add(product);
+                }
+            }
+        }
+
+        if(showList.isEmpty()){
+            throw new Exception("Product Not Found!!");
+        }
+
+        return showList;
     }
 }
 

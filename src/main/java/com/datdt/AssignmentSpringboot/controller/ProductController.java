@@ -87,4 +87,13 @@ public class ProductController{
         public Map<String, Boolean> deleteProduct(@PathVariable(value = "id") Long productID){
             return productService.deleteProduct(productID);
         }
+        @GetMapping("/admin/ByName")
+        public List<Product> getProductByName(@RequestParam("productName") String productName) throws Exception{
+            return productService.findProductByName(productName);
+        }
+    
+        @GetMapping("/customer/ByName")
+        public List<Product> getProductByNameCustomer(@RequestParam("productName") String productName) throws Exception{
+            return productService.findproductByNameCustomer(productName);
+        }
 }
