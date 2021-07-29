@@ -9,7 +9,7 @@ public class LoginRequest {
     private String username;
 
     @NotBlank
-    @Size(min = 6, message = "Username have at least 6 characters")
+    @Size(min = 6, message = "Password have at least 6 characters")
     private String password;
 
     public String getUsername() {

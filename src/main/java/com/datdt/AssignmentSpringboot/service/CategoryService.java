@@ -68,7 +68,6 @@ public class CategoryService{
             this.categoryRepository.delete(category);
             Map<String, Boolean> response = new HashMap<>();
             response.put("DELETED", Boolean.TRUE);
-
                 return response;
     }
       

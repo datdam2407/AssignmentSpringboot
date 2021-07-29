@@ -98,7 +98,8 @@ public class ProductService {
     }
     //
     public Map<String, Boolean> setCategoryOfProductIsDeleted(Product product){
-            product.setCategory(null);
+        Category none = categoryRepository.findCateById(3L);
+        product.setCategory(none);    
             this.productRepository.save(product);
             Map<String, Boolean> response = new HashMap<>();
             response.put("Set NULL", Boolean.TRUE);
